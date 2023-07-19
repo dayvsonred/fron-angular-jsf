@@ -1,0 +1,5 @@
+#execute esse comando abaixo:
+docker build -t ng-docker-app:v1.0.0 -f ./Dockerfile .
+
+#depois de criada a img execute este comando abaixo: 
+docker run -p 8000:80 -d ng-docker-app:v1.0.0

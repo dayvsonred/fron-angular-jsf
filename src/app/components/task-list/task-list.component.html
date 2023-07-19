@@ -1,0 +1,77 @@
+<div class="signin-content">
+  <mat-card style="text-align: center;">
+    <mat-card-content>
+      <!-- <form [formGroup]="form" (ngSubmit)="onSubmit()"> -->
+      <mat-card-title>
+        <p>list of task</p>
+      </mat-card-title>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox (change)="$event ? toggleAllRows() : null" (click)="checkClicEventAll()"
+              [checked]="selection.hasValue() && isAllSelected()"
+              [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation(); checkClicEvent(row)"
+              (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row) || row.select"
+              [aria-label]="checkboxLabel(row)">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+
+        <!--- Note that these columns can be defined in any order.
+                          The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <td mat-cell *matCellDef="let element" (click)="goEditTask(element)"> {{element.position}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name TODO</th>
+          <td mat-cell *matCellDef="let element" (click)="goEditTask(element)"> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="conclusion">
+                      <th mat-header-cell *matHeaderCellDef> conclusion </th>
+                      <td mat-cell *matCellDef="let element"> {{element.conclusion}} </td>
+                    </ng-container>
+                   
+                    <ng-container matColumnDef="dueInfo">
+                      <th mat-header-cell *matHeaderCellDef> due </th>
+                      <td mat-cell *matCellDef="let element"> {{element.dueInfo}} </td>
+                    </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <br />
+      <mat-paginator (page)="nextpageData($event)" [length]="pgnation_totalPages" [pageSizeOptions]="[12, 50, 100]" aria-label="Select page">
+      </mat-paginator>
+      <br />
+
+      <section>
+        <div class="example-button-row">
+          <div class="demo-button-container" style="text-align: left;">
+
+            <button mat-raised-button color="primary" (click)="goBack()" class="demo-button" style="margin-right:20px">
+              back page
+            </button>
+            <button mat-raised-button color="primary" (click)="addNewTask()" class="demo-button" style="margin-right:20px">
+              Add Todo
+            </button>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- </form> -->
+    </mat-card-content>
+  </mat-card>
+</div>

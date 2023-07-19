@@ -1,0 +1,65 @@
+<div class="signin-content">
+	<mat-card style="text-align: center;">
+		<mat-card-content>
+			<!-- <form [formGroup]="form" (ngSubmit)="onSubmit()"> -->
+				<mat-card-title>
+					<p>List of Projects</p>
+				</mat-card-title>
+
+
+
+
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                    <!--- Note that these columns can be defined in any order.
+                          The actual rendered columns are set as a property on the row definition" -->
+                  
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="position">
+                      <th mat-header-cell *matHeaderCellDef> N°. </th>
+                      <td mat-cell *matCellDef="let element" (click)="goTodo(element)"> {{element.position}} </td>
+                    </ng-container>
+                  
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="name" >
+                      <th mat-header-cell *matHeaderCellDef> Name Projects</th>
+                      <td mat-cell *matCellDef="let element" (click)="goTodo(element)"> {{element.name}} </td>
+                    </ng-container>
+                   
+                    <!-- <ng-container matColumnDef="weight">
+                      <th mat-header-cell *matHeaderCellDef> Weight </th>
+                      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+                    </ng-container>
+                   
+                    <ng-container matColumnDef="symbol">
+                      <th mat-header-cell *matHeaderCellDef> Symbol </th>
+                      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+                    </ng-container> -->
+                  
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+
+                  <br />
+                  <mat-paginator (page)="nextpageData($event)" [length]="pgnation_totalPages" [pageSizeOptions]="[12, 50, 100]" aria-label="Select page">
+                  </mat-paginator>
+                  <br />
+
+                  <section>
+                    <div class="example-button-row">
+                      <div class="demo-button-container" style="text-align: left;">
+                        <button mat-raised-button color="primary" (click)="onSubmit()" class="demo-button" style="margin-right:20px">
+                          Add Projects
+                      </button>
+            
+                        <button mat-raised-button color="primary" (click)="goBack()" class="demo-button" style="margin-right:20px">
+                          Exit of system
+                        </button>
+                      </div>
+                    </div>
+                  </section>
+				
+			<!-- </form> -->
+		</mat-card-content>
+	</mat-card>
+</div>

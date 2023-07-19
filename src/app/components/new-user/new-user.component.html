@@ -1,0 +1,42 @@
+<div class="signin-content">
+	<mat-card style="text-align: center;">
+		<mat-card-content>
+			<form [formGroup]="form" (ngSubmit)="onSubmit()">
+				<mat-card-title>
+					<p>Please login</p>
+				</mat-card-title>
+				
+				<mat-form-field class="full-width-input">
+					<input matInput placeholder="User" formControlName="userName" required>
+					<mat-error *ngIf="isFieldInvalid('userName')">
+						Please inform your user name
+					</mat-error>
+				</mat-form-field><br />
+				<mat-form-field class="full-width-input">
+					<input matInput type="password" placeholder="Password" formControlName="password" required>
+					<mat-error *ngIf="isFieldInvalid('password')">
+						Please inform your password
+					</mat-error>
+				</mat-form-field><br />
+				<mat-form-field class="full-width-input">
+					<input matInput type="password" placeholder="Password confirm" formControlName="passwordConfirm" required>
+					<mat-error *ngIf="isFieldInvalid('passwordConfirm')">
+						Please inform your password
+					</mat-error>
+				</mat-form-field><br />
+				
+
+				<section>
+                    <div class="example-button-row">
+                      <div class="demo-button-container" style="text-align: center;">
+						<button mat-raised-button color="primary" type="submit" style="margin-right:20px" >create new user</button>
+                      </div>
+                    </div>
+                  </section>
+
+
+
+			</form>
+		</mat-card-content>
+	</mat-card>
+</div>
