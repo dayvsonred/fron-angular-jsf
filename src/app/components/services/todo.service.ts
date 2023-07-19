@@ -19,6 +19,7 @@ export class TodoService {
 	private link_get_task: String = `/core/task/page/`;
 	private link_get_one_task: String = `/core/task/`;
 	private urlBase: String = `http://localhost:8765`;
+	private link_create_project: String = `/core/projeto`;
 	
 	// todoList: TodoList;
 
@@ -252,6 +253,45 @@ export class TodoService {
 				console.log(res);
 
 				return true;
+			}),
+			catchError((e) => {
+				if (e.error.message) return throwError(() => e.error.message);
+				return throwError(
+					() =>
+						'No momento não estamos conseguindo validar este dados, tente novamente mais tarde!'
+				);
+			})
+		);
+	}
+
+
+	
+	
+	public creatProjeto(payload : 
+		{
+			nome : string, 
+			data_inicio: string, 
+			data_previsao_fim: string,
+			data_fim: string,
+			descricao: string,
+			status: string,
+			orcamento: string,
+			risco: string,
+			idgerente: string,
+
+		}): Observable<any> {
+		const body = payload;
+		let token = this.getAccessToken();
+
+		const headers = {
+			'Authorization': "Bearer "+ token,
+			'Content-Type': "application/json",
+		};
+
+		return this.http.post<any>(`${this.urlBase}${this.link_create_project}`, body, { headers }).pipe(
+			map((res) => {
+
+				return this.router.navigate(['dashboard']);	
 			}),
 			catchError((e) => {
 				if (e.error.message) return throwError(() => e.error.message);

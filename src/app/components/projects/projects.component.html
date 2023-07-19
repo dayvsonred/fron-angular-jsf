@@ -1,0 +1,102 @@
+<div class="signin-content">
+	<mat-card style="text-align: center;">
+		<mat-card-content>
+			<!-- <form [formGroup]="form" (ngSubmit)="onSubmit()"> -->
+				<mat-card-title>
+					<p>create new Projects</p>
+				</mat-card-title>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          
+          <mat-form-field class="full-width-input">
+            <input matInput placeholder="Projects" formControlName="nome" required>
+            <mat-error *ngIf="isFieldInvalid('nome')">
+              Please inform title of Projects
+            </mat-error>
+          </mat-form-field><br />
+
+          <mat-form-field class="full-width-input">
+            <input matInput placeholder="Budget" formControlName="budget" required>
+            <mat-error *ngIf="isFieldInvalid('budget')">
+              Please inform Budget of Projects
+            </mat-error>
+          </mat-form-field><br />
+          
+
+          <mat-form-field class="full-width-input btn-sub" >
+            <mat-label>Choose a start date</mat-label>
+            <input matInput [matDatepicker]="data_inicio" formControlName="data_inicio">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="data_inicio"></mat-datepicker-toggle>
+            <mat-datepicker #data_inicio></mat-datepicker>
+          </mat-form-field> <br />
+
+          <mat-form-field class="full-width-input btn-sub" >
+            <mat-label>Choose a end date forecast</mat-label>
+            <input matInput [matDatepicker]="data_previsao_fim" formControlName="data_previsao_fim">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="data_previsao_fim"></mat-datepicker-toggle>
+            <mat-datepicker #data_previsao_fim></mat-datepicker>
+          </mat-form-field> <br />
+
+          <mat-form-field class="full-width-input btn-sub" >
+            <mat-label>Choose a date due</mat-label>
+            <input matInput [matDatepicker]="data_fim" formControlName="data_fim">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="data_fim"></mat-datepicker-toggle>
+            <mat-datepicker #data_fim></mat-datepicker>
+          </mat-form-field> <br />
+
+          <mat-form-field class="example-full-width">
+            <mat-label>description</mat-label>
+            <textarea matInput placeholder="Ex. It makes me feel..." formControlName="descricao"></textarea>
+          </mat-form-field><br />
+
+          <mat-form-field>
+            <mat-label>Select status</mat-label>
+            <mat-select formControlName="status">
+              <mat-option *ngFor="let food of foods" [value]="food.value" > 
+                {{food.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field><br />
+
+          <mat-form-field>
+            <mat-label>Select risk</mat-label>
+            <mat-select formControlName="risco">
+              <mat-option *ngFor="let risk of risks" [value]="risk.value">
+                {{risk.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field><br />
+
+          <section class="example-section">
+            <mat-slide-toggle  formControlName="idgerente"
+                class="example-margin"
+                [color]="color"
+                [checked]="checked"
+                [disabled]="disabled">
+                Manager
+            </mat-slide-toggle>
+          </section><br />
+
+          <br />
+          <section>
+            <div class="example-button-row">
+              <div class="demo-button-container" style="text-align: center;">
+    
+                <button mat-raised-button color="primary" (click)="goBack()" class="demo-button" style="margin-right:20px">
+                  back page
+                </button>
+                <button mat-raised-button color="primary" type="submit">Creat</button>
+              </div>
+            </div>
+          </section>
+
+
+        </form>
+				
+				
+			<!-- </form> -->
+		</mat-card-content>
+	</mat-card>
+</div>

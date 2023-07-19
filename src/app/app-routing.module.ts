@@ -13,6 +13,13 @@ const routes: Routes = [
 		canActivate:[AuthGuard]
 	},
   {
+		path:'projects', 
+    loadChildren: () => import('./components/projects/projects.module').then((m) => m.ProjectsModule),
+		canActivate:[AuthGuard]
+	},
+
+
+  {
     path: 'todo',
     loadChildren: () => import('./components/todo/todo.module').then((m) => m.TodoModule),
     canActivate:[AuthGuard]
