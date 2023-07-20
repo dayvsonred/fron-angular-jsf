@@ -1,0 +1,62 @@
+<div class="signin-content">
+	<mat-card>
+		<mat-card-content>
+			<!-- <form [formGroup]="form" (ngSubmit)="onSubmit()"> -->
+				<mat-card-title>
+					<p>create new Pessoa</p>
+				</mat-card-title>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          
+          <mat-form-field class="full-width-input">
+            <input matInput placeholder="Pessoa" formControlName="nome" required>
+            <mat-error *ngIf="isFieldInvalid('nome')">
+              Please inform name
+            </mat-error>
+          </mat-form-field><br />
+
+          <mat-form-field class="full-width-input btn-sub" >
+            <mat-label>Choose a birth date</mat-label>
+            <input matInput [matDatepicker]="datanascimento" formControlName="datanascimento">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="datanascimento"></mat-datepicker-toggle>
+            <mat-datepicker #datanascimento></mat-datepicker>
+          </mat-form-field> <br />
+
+          <mat-form-field class="full-width-input">
+            <input matInput placeholder="CPF" formControlName="cpf" required>
+            <mat-error *ngIf="isFieldInvalid('cpf')">
+              CPF
+            </mat-error>
+          </mat-form-field><br />
+
+          <section class="example-section">
+            <mat-slide-toggle  formControlName="funcionario"
+                class="example-margin"
+                [color]="color"
+                [checked]="checked"
+                [disabled]="disabled">
+                Manager
+            </mat-slide-toggle>
+          </section><br />
+
+          <br />
+          <section>
+            <div class="example-button-row">
+              <div class="demo-button-container" style="text-align: center;">
+    
+                <button mat-raised-button color="primary" (click)="goBack()" class="demo-button" style="margin-right:20px">
+                  back page
+                </button>
+                <button mat-raised-button color="primary" type="submit">Creat</button>
+              </div>
+            </div>
+          </section>
+
+
+        </form>
+				
+				
+			<!-- </form> -->
+		</mat-card-content>
+	</mat-card>
+</div>

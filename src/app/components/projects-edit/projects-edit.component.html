@@ -53,7 +53,7 @@
 
           <mat-form-field>
             <mat-label>Select status</mat-label>
-            <mat-select formControlName="status">
+            <mat-select formControlName="status"  [(value)]="setStatus">
               <mat-option *ngFor="let food of foods" [value]="food.value" > 
                 {{food.viewValue}}
               </mat-option>
@@ -62,14 +62,14 @@
 
           <mat-form-field>
             <mat-label>Select risk</mat-label>
-            <mat-select formControlName="risco">
+            <mat-select formControlName="risco" [(value)]="setrisco">
               <mat-option *ngFor="let risk of risks" [value]="risk.value">
                 {{risk.viewValue}}
               </mat-option>
             </mat-select>
           </mat-form-field><br />
-
-          <!-- <section class="example-section">
+<!-- 
+          <section class="example-section">
             <mat-slide-toggle  formControlName="idgerente"
                 class="example-margin"
                 [color]="color"
@@ -94,7 +94,7 @@
                 <button mat-raised-button color="primary" (click)="goBack()" class="demo-button" style="margin-right:20px">
                   back page
                 </button>
-                <button mat-raised-button color="primary" type="submit">Creat</button>
+                <button mat-raised-button color="primary" type="submit">Salve</button>
               </div>
             </div>
           </section>

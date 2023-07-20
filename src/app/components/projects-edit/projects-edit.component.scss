@@ -50,3 +50,22 @@ tr.mat-mdc-row:hover {
   cursor: pointer;
   background-color: rgb(187, 204, 243);
 }
+
+.mat-form-field {
+  width: 100% !important;
+}
+.mat-card-header-text {
+  width: 100% v
+}
+
+.mat-card-header {
+  justify-content: center;
+}
+
+mat-table{
+    width: 100% !important;
+}
+
+.mat-mdc-form-field {
+  display: flex !important;
+}

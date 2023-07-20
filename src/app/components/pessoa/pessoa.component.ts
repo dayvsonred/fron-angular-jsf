@@ -6,13 +6,15 @@ import { MatDatepickerControl, MatDatepickerPanel } from '@angular/material/date
 import { ThemePalette } from '@angular/material/core';
 
 
+
+
 const picker2:any = null;
 
 @Component({
-  templateUrl: 'projects.component.html',
-  styleUrls: ['projects.component.scss']
+  templateUrl: 'pessoa.component.html',
+  styleUrls: ['pessoa.component.scss']
 })
-export class ProjectsComponent implements OnInit {
+export class PessoaComponent implements OnInit {
 
   form: FormGroup | any;
   private formSubmitAttempt: boolean | undefined;
@@ -21,7 +23,7 @@ export class ProjectsComponent implements OnInit {
   disabled = false;
 
   nome = null;
-  data_inicio= null;
+  datanascimento= null;
   data_previsao_fim= null;
   data_fim= null;
   descricao= null;
@@ -48,19 +50,14 @@ export class ProjectsComponent implements OnInit {
   ];
 
 
-  constructor(private router: Router,private todoService: TodoService, private fb: FormBuilder,) { }
+  constructor(private router: Router,private todoService: TodoService, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.form = this.fb.group({
       nome: ['', Validators.required],
-      data_inicio: ['', Validators.required],
-      data_previsao_fim: ['', Validators.required],
-      data_fim: ['', Validators.required],
-      descricao: ['', Validators.required],
-      status: ['', Validators.required],
-      risco: ['', Validators.required],
-      idgerente: ['', Validators.required],
-      budget: ['', Validators.required],
+      datanascimento: ['', Validators.required],
+      cpf: ['', Validators.required],
+      funcionario: ['', Validators.required],
     });
   }
 
@@ -78,20 +75,11 @@ export class ProjectsComponent implements OnInit {
 
   onSubmit(){
     console.log(this.form.value);
-
-
-
-    this.todoService.creatProjeto({
-			nome : this.form.value.nome, 
-			data_inicio: this.form.value.data_inicio.toISOString(), 
-			data_previsao_fim: this.form.value.data_previsao_fim.toISOString(), 
-			data_fim: this.form.value.data_fim.toISOString(), 
-			descricao: this.form.value.descricao,
-			status: this.form.value.status,
-			orcamento: this.form.value.budget,
-			risco: this.form.value.risco,
-			idgerente: this.form.value.idgerente,
-
+    this.todoService.creatPessoa({
+      cpf : this.form.value.cpf, 
+			datanascimento: this.form.value.datanascimento.toISOString(), 
+			funcionario: this.form.value.funcionario == "" ? false : this.form.value.funcionario,
+			nome: this.form.value.nome,
 		}).subscribe({
       next: (res) => res,
       error: (e) => e,

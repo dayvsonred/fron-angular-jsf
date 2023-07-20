@@ -17,6 +17,23 @@ const routes: Routes = [
     loadChildren: () => import('./components/projects/projects.module').then((m) => m.ProjectsModule),
 		canActivate:[AuthGuard]
 	},
+  {
+		path:'projects/edit/:id', 
+    loadChildren: () => import('./components/projects-edit/projects-edit.module').then((m) => m.ProjectsEditModule),
+		canActivate:[AuthGuard]
+	},
+  {
+		path:'projects/link/:id',
+    loadChildren: () => import('./components/pessoa-list/pessoa-list.module').then((m) => m.PessoaListModule),
+		canActivate:[AuthGuard]
+	},
+  {
+		path:'pessoa', 
+    loadChildren: () => import('./components/pessoa/pessoa.module').then((m) => m.PessoaModule),
+		canActivate:[AuthGuard]
+	},
+
+
 
 
   {

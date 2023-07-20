@@ -11,28 +11,26 @@ import {SelectionModel} from '@angular/cdk/collections';
 import { Task } from 'src/app/model/task';
 
 export interface TodoElement {
-  name: string;
+  nome: string;
   position: number;
   item: any;
-  select: boolean;
-  conclusion: String;
-  dueInfo: String;
+  cpf: String;
+  datanascimento: String;
 }
 
 const ELEMENT_DATA: TodoElement[] = [
-  { name: "asdasd", item: "", position:  1, select: false,  conclusion: new Date().toISOString(),  dueInfo: 'vencido'},
-  { name: "asdasd", item: "", position:  1, select: false,  conclusion: new Date().toISOString(),  dueInfo: 'vencido'}
 ];
 
 @Component({
-  templateUrl: 'task-list.component.html',
+  templateUrl: 'pessoa-list.component.html',
+  styleUrls: ['pessoa-list.component.scss'],
 })
-export class TaskListComponent implements OnInit  {
+export class PessoaListComponent implements OnInit  {
   //dataSource: Element[] | undefined;
   // @ViewChild(MatPaginator)
   // paginator!: MatPaginator; 
 
-  displayedColumns: string[] = ['select', 'position', 'name', 'conclusion', 'dueInfo'];
+  displayedColumns: string[] = [ 'position', 'nome', 'datanascimento', 'cpf'];
   dataSource = ELEMENT_DATA;
   selection = new SelectionModel<TodoElement>(true, []);
   todoId:any = null;
@@ -40,6 +38,7 @@ export class TaskListComponent implements OnInit  {
   pgnation_pageSize: number = 0;  
   pgnation_length: number = 12;  
   pgnation_totalPages: number = 0;
+  IdPg = null;
   
   constructor(
     private router: Router,
@@ -49,17 +48,11 @@ export class TaskListComponent implements OnInit  {
 
   ngOnInit() {
     console.log("opa task");
-    // this.dataSource.paginator = this.paginator;
-    //this.dataSource = ELEMENT_DATA;
-
-    this.todoId = this.route.snapshot.params['id'];
-    console.log(this.todoId);
+    this.IdPg = this.route.snapshot.params['id'];
 
     let paginator = `?linesPerPage=${this.pgnation_length}&page=${this.pgnation_pageSize}`;
-    this.todoService.getTaskOfUser(this.todoId, paginator).subscribe({
+    this.todoService.getPesoaForLinkProject(paginator).subscribe({
       next: (res) => {
-        console.log("get task of todo");
-
 
         this.pgnation_page = res.number; 
         this.pgnation_pageSize = res.number;  
@@ -68,27 +61,23 @@ export class TaskListComponent implements OnInit  {
 
         let todoList = []; 
         for (const element of res.content) {
-          let mes = element.conclusion[1] < 10 ? '0'+element.conclusion[1] : element.conclusion[1];
-          let dia = element.conclusion[2] < 10 ? '0'+element.conclusion[2] : element.conclusion[2];
-          let hora = element.conclusion[3] < 10 ? '0'+element.conclusion[3] : element.conclusion[3];
-          let min = element.conclusion[4] < 10 ? '0'+element.conclusion[4] : element.conclusion[4];
+          let mes = element.datanascimento[1] < 10 ? '0'+element.datanascimento[1] : element.datanascimento[1];
+          let dia = element.datanascimento[2] < 10 ? '0'+element.datanascimento[2] : element.datanascimento[2];
           
-           let dateConclusion = new Date( `${element.conclusion[0]}-${mes}-${dia}T${hora}:${min}:00Z` );
-
+           let datanascimento = new Date( `${element.datanascimento[0]}-${mes}-${dia}T00:00:00Z` );
 
 
           todoList.push({ 
-            select: element.status, 
             position: todoList.length, 
-            name: element.name, 
             item: element,
-            conclusion: this.formatDate(dateConclusion),
-            dueInfo: this.checkDue(dateConclusion)
+            nome: element.nome,
+            datanascimento: this.formatDate(datanascimento),
+            cpf: element.cpf
           });
         }
 
         this.dataSource = todoList;
-
+        console.log("this.dataSource");
         console.log(this.dataSource);
 
       },
@@ -111,8 +100,6 @@ export class TaskListComponent implements OnInit  {
     hour = this.checkZero(hour);
     minutes = this.checkZero(minutes);
     seconds = this.checkZero(seconds);
-
-    console.log(day + "/" + month + "/" + year + " " + hour + ":" + minutes + ":" + seconds);
     return day + "/" + month + "/" + year + " " + hour + ":" + minutes + ":" + seconds;
   }
   
@@ -138,12 +125,27 @@ export class TaskListComponent implements OnInit  {
     return this.router.navigate(['task/creat/'+this.todoId]);
   }
 
+  goLinkPesoa(element: any){
+    console.log("goLinkPesoa");
+    console.log(element);
+    console.log(element.item.id);
+    
+
+    this.todoService.addPesoaForLinkProject(element.item.id).subscribe({
+      next: (res) => res,
+      error: (e) => e,
+    })
+
+
+    this.router.navigate([`projects/link/${this.IdPg}`]);
+  }
+
 
   goEditTask(element: any){
     console.log("goEditTask");
     console.log(element);
     console.log(element.item.id);
-    this.router.navigate(['task/edit/'+element.item.id+'/'+this.todoId]);
+    
 
   }
 
@@ -198,19 +200,19 @@ export class TaskListComponent implements OnInit  {
   }
 
   setConclusionTask(id: string, todoId:string){
-    let name = "name";
-    this.todoService.setConclusionTask({ id, todoId, name }).subscribe({
-      next: (res) => res,
-      error: (e) => e,
-    })
+    // let name = "name";
+    // this.todoService.setConclusionTask({ id, todoId, name }).subscribe({
+    //   next: (res) => res,
+    //   error: (e) => e,
+    // })
   }
 
   setConclusionTaskLoop(id: string, todoId:string){
-    let name = "name";
-    this.todoService.setConclusionTaskLoop({ id, todoId, name }).subscribe({
-      next: (res) => res,
-      error: (e) => e,
-    })
+    // let name = "name";
+    // this.todoService.setConclusionTaskLoop({ id, todoId, name }).subscribe({
+    //   next: (res) => res,
+    //   error: (e) => e,
+    // })
   }
 
   goBack(){

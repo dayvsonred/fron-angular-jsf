@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 //import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
-import { DashboardComponent } from './dashboard.component';
-import { DashboardRoutingModule } from './dashboard-routing.module';
 import { CommonModule } from '@angular/common';
 
 
@@ -17,10 +15,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatDialog, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
+import { PessoaRoutingModule } from './pessoa-routing.module';
+import { PessoaComponent } from './pessoa.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatSelectModule} from '@angular/material/select';
 
-import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -28,11 +30,12 @@ import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator'
     FormsModule,
     ReactiveFormsModule, 
     CommonModule,
-    DashboardRoutingModule,
+    PessoaRoutingModule,
     MatToolbarModule,MatCardModule,MatButtonModule,MatTableModule,MatFormFieldModule,MatInputModule,
-    MatPaginatorModule,
-    MatCheckboxModule, MatDialogModule
+    MatDatepickerModule,MatNativeDateModule,
+    MatSliderModule,MatSlideToggleModule,MatSelectModule
+
   ],
-  declarations: [ DashboardComponent ]
+  declarations: [ PessoaComponent ]
 })
-export class DashboardModule {}
+export class PessoaModule {}
