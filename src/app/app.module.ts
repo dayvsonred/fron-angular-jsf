@@ -21,10 +21,7 @@ import { TodoService } from './components/services/todo.service';
   ],
   imports: [
     BrowserModule,
-    // CommonModule,
     AppRoutingModule,
-    // FormsModule,
-    // ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     

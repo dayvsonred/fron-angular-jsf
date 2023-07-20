@@ -75,8 +75,6 @@ export class ProjectsEditComponent implements OnInit, AfterViewInit  {
   }
 
   ngAfterViewInit(){
-    // this.projectId = this.route.snapshot.params['id'];
-    // this.getData(this.projectId);
   }
 
 
@@ -84,26 +82,6 @@ export class ProjectsEditComponent implements OnInit, AfterViewInit  {
     this.projectIdOk = projectId;
     this.todoService.getOneProjects(projectId).subscribe({
       next: (res) => {
-        console.log(res);
-
-        // let mes = res.conclusion[1] < 10 ? '0'+res.conclusion[1] : res.conclusion[1];
-        // let dia = res.conclusion[2] < 10 ? '0'+res.conclusion[2] : res.conclusion[2];
-        // let hora = res.conclusion[3] < 10 ? '0'+res.conclusion[3] : res.conclusion[3];
-        // let min = res.conclusion[4] < 10 ? '0'+res.conclusion[4] : res.conclusion[4];
-        
-        // let dateConclusion = new Date( `${res.conclusion[0]}-${mes}-${dia}T${hora}:${min}:00Z` );
-        // console.log(dateConclusion);
-
-        // this.form = this.fb.group({
-        //   taskName: [res.name, Validators.required],
-        //   picker: [dateConclusion, Validators.required],
-        //   pickerTimer: [`${hora}:${min}`, Validators.required]
-        // });
-
-        //this.form.value.risco = {value: 'alto', viewValue: 'alto risco'};
-
-        
-
         this.form = this.fb.group({
           nome:               [res.nome                               , Validators.required],
           data_inicio:        [this.formatDate(res.data_inicio)       , Validators.required],
@@ -115,7 +93,6 @@ export class ProjectsEditComponent implements OnInit, AfterViewInit  {
           idgerente:          [res.idgerente                          , Validators.required],
           budget:             [res.orcamento                          , Validators.required],
         });
-
 
       },
       error: (e) => e,
@@ -147,7 +124,6 @@ export class ProjectsEditComponent implements OnInit, AfterViewInit  {
 
 
   onSubmit(){
-    console.log(this.form.value);
 
     this.todoService.updateProjeto({
       id:  this.projectIdOk, 
@@ -180,10 +156,6 @@ export class ProjectsEditComponent implements OnInit, AfterViewInit  {
     
   }
   onSelectEvent(value:any, sssss:any) {
-    console.log("onSelectEvent")
-    console.log(value)
-    console.log(value.source.value)
-    //this.form.value.risco = value.source.value;
 
   }
 }

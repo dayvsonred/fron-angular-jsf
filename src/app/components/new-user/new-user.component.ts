@@ -49,10 +49,6 @@ export class NewUserComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    console.log("criando usuario");
-    console.log(this.form.value.userName);
-    console.log(this.form.value.password);
-    console.log(this.form.value.passwordConfirm);
 
     if(this.form.value.password != this.form.value.passwordConfirm){
       this.openSnackBar();
@@ -85,6 +81,10 @@ export class NewUserComponent implements OnInit {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
     });
+  }
+
+  goBack(){
+    this.router.navigate(['']);
   }
 
 }

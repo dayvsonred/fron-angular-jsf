@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../services/todo.service';
 import { Router } from '@angular/router';
-import { TodoList } from 'src/app/model/todoList';
 import { Subject } from 'rxjs';
 import {SelectionModel} from '@angular/cdk/collections';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -55,7 +54,6 @@ export class DashboardComponent implements OnInit {
 
         let todoList = []; 
         for (let element of res.content) {
-          console.log(element); 
           todoList.push({ position: todoList.length, 
             name: element.nome, 
             status: element.status, 
@@ -66,7 +64,6 @@ export class DashboardComponent implements OnInit {
         }
 
         this.dataSource = todoList;
-        console.log(this.dataSource);
       },
       error: (e) => e,
     })
@@ -82,8 +79,6 @@ export class DashboardComponent implements OnInit {
   }
 
   goTodo(element: any){
-    console.log(element)
-    console.log(element.item.id)
     this.router.navigate(['projects/edit/'+element.item.id]);
   }
 
@@ -104,7 +99,6 @@ export class DashboardComponent implements OnInit {
   previousPageLabel = 'Previous page';
 
   getRangeLabel(page: number, pageSize: number, length: number): string {
-    console.log("getRangeLabel")
     if (length === 0) {
       return `Page 1 of 1`;
     }
@@ -113,19 +107,11 @@ export class DashboardComponent implements OnInit {
   }
 
   nextpageData(element:any){
-    console.log("nextpageData");
-    console.log(element);
     this.pgnation_pageSize = element.pageIndex;  
     this.pgnation_length = element.pageSize;  
 
     this.ngOnInit();
   }
-
-
-
-
-
-
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -152,11 +138,6 @@ export class DashboardComponent implements OnInit {
   }
 
   checkClicEvent(event:any){
-    console.log("checkClicEvent");
-    console.log(event);
-    console.log("---------------------------------");
-    console.log(event.item);
-    
 
     if(  this.disabledSelectAll == false ){
       this.projectSelectIs = event.item.id;
@@ -174,10 +155,6 @@ export class DashboardComponent implements OnInit {
     }
 
     this.disabledSelectAll =!this.disabledSelectAll
-
-
-    console.log( this.dataSource);
-    // this.setConclusionTask(event.item.id, this.todoId);
   }
 
   getDisableRow(id:any){
@@ -185,24 +162,6 @@ export class DashboardComponent implements OnInit {
     let element = this.dataSource[id];
     return element.disabled;
   }
-  
-
-  setConclusionTask(id: string, todoId:string){
-    let name = "name";
-    this.todoService.setConclusionTask({ id, todoId, name }).subscribe({
-      next: (res) => res,
-      error: (e) => e,
-    })
-  }
-
-  setConclusionTaskLoop(id: string, todoId:string){
-    let name = "name";
-    this.todoService.setConclusionTaskLoop({ id, todoId, name }).subscribe({
-      next: (res) => res,
-      error: (e) => e,
-    })
-  }
-
 
   onLinkPesoaOfProject(){
     if(  this.disabledSelectAll == false ){
@@ -230,8 +189,6 @@ export class DashboardComponent implements OnInit {
 
 
   onDelete(element:any){
-    console.log(element);
-
     this.todoService.onDeleteProject(element.delete.id).subscribe({
       next: (res) => { this.ngOnInit() },
       error: (e) => e,

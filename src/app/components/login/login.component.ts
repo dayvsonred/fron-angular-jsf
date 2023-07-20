@@ -45,10 +45,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    console.log("iniciando login enciando valores")
-    console.log(this.form.value.password)
-    console.log(this.form.value.userName)
-
     this.authService.sign({
       email: this.form.value.userName,
       password: this.form.value.password

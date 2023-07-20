@@ -16,7 +16,6 @@ export class AuthService {
 	}
 
 	public sign(payload: { email: string; password: string }): Observable<any> {
-		console.log("send login to service")
 		const headers = {
 			'Authorization': "Basic QVBJX05BTUVfQUNDRVNTOkFQSV9TRUNSRVRfQUNDRVNT",
 			"Content-Type": "application/x-www-form-urlencoded",
@@ -60,10 +59,7 @@ export class AuthService {
 		return !jwtHelper.isTokenExpired(token);
 	}
 
-	
 	public createNewUserLongin(payload : {email : string, name: string, password: string }): Observable<any> {
-		console.log("start creat login of user");
-		console.log(payload);
 		const body = payload; 
 
 		const headers = {
@@ -72,9 +68,6 @@ export class AuthService {
 
 		return this.http.post<any>(`${this.urlBase}${this.link_creat_login}`, body, { headers }).pipe(
 			map((res) => {
-				console.log("res creat login of user");
-				console.log(res);
-
 				return this.router.navigate(['']);	
 			}),
 			catchError((e) => {
@@ -86,5 +79,4 @@ export class AuthService {
 			})
 		);
 	}
-
 }

@@ -5,9 +5,6 @@ import { Router } from '@angular/router';
 import { MatDatepickerControl, MatDatepickerPanel } from '@angular/material/datepicker';
 import { ThemePalette } from '@angular/material/core';
 
-
-const picker2:any = null;
-
 @Component({
   templateUrl: 'projects.component.html',
   styleUrls: ['projects.component.scss']
@@ -77,10 +74,6 @@ export class ProjectsComponent implements OnInit {
 
 
   onSubmit(){
-    console.log(this.form.value);
-
-
-
     this.todoService.creatProjeto({
 			nome : this.form.value.nome, 
 			data_inicio: this.form.value.data_inicio.toISOString(), 

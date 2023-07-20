@@ -20,9 +20,7 @@ import { MatCardModule } from '@angular/material/card';
     FormsModule,
     LoginRoutingModule,
     ReactiveFormsModule, 
-    // BrowserModule,
     CommonModule,
-    //HttpClientModule, 
     MatToolbarModule,MatCardModule,MatButtonModule,MatTableModule,MatFormFieldModule,MatInputModule
   ],
   declarations: [LoginComponent]

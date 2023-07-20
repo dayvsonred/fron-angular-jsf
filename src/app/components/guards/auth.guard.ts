@@ -7,22 +7,8 @@ import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-
-	// loggedInStatus : boolean = false;
-
 	constructor(private authService : AuthService, public router: Router){
 	}
-  
-//   canActivate(
-//     next: ActivatedRouteSnapshot,
-//     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-// 	this.authService.loggenIn$.subscribe(
-// 		(status: boolean) => {
-// 			this.loggedInStatus = status;
-// 		});  
-// 	return this.loggedInStatus;	
-//   }
-
 canActivate(
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {

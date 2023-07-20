@@ -75,7 +75,6 @@ export class PessoaComponent implements OnInit {
 
 
   onSubmit(){
-    console.log(this.form.value);
     this.todoService.creatPessoa({
       cpf : this.form.value.cpf, 
 			datanascimento: this.form.value.datanascimento.toISOString(), 

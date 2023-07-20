@@ -8,7 +8,6 @@ import { TodoService } from '../services/todo.service';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {SelectionModel} from '@angular/cdk/collections';
-import { Task } from 'src/app/model/task';
 
 export interface TodoElement {
   nome: string;
@@ -26,9 +25,6 @@ const ELEMENT_DATA: TodoElement[] = [
   styleUrls: ['pessoa-project.component.scss'],
 })
 export class PessoaProjectComponent implements OnInit  {
-  //dataSource: Element[] | undefined;
-  // @ViewChild(MatPaginator)
-  // paginator!: MatPaginator; 
 
   displayedColumns: string[] = [ 'position', 'nome', 'datanascimento', 'cpf'];
   dataSource = ELEMENT_DATA;
@@ -47,7 +43,6 @@ export class PessoaProjectComponent implements OnInit  {
     private fb: FormBuilder) { }
 
   ngOnInit() {
-    console.log("opa task");
     this.IdPg = this.route.snapshot.params['id'];
 
     let paginator = `?linesPerPage=${this.pgnation_length}&page=${this.pgnation_pageSize}`;
@@ -114,21 +109,9 @@ export class PessoaProjectComponent implements OnInit  {
   }
 
   
-  addNewTask(){
-    console.log(" addNewTask ------------------- ");
-    console.log("opa task");
-    // this.dataSource.paginator = this.paginator;
-    //this.dataSource = ELEMENT_DATA;
-    console.log(this.todoId);
-    return this.router.navigate(['task/creat/'+this.todoId]);
-  }
+
 
   goLinkPesoa(element: any){
-    console.log("goLinkPesoa");
-    console.log(element);
-    console.log(element.item.id);
-    
-
     this.todoService.addPesoaForLinkProject(element.item.id, {id : this.IdPg} ).subscribe({
       next: (res) => { this.ngOnInit() },
       error: (e) => e,
@@ -138,11 +121,6 @@ export class PessoaProjectComponent implements OnInit  {
 
 
   goEditTask(element: any){
-    console.log("goEditTask");
-    console.log(element);
-    console.log(element.item.id);
-    
-
   }
 
   isAllSelected() {
@@ -170,13 +148,8 @@ export class PessoaProjectComponent implements OnInit  {
   }
 
   checkClicEventAll(){
-    console.log("checkClicEventAll");
-    console.log(this.isAllSelected());
-    console.log("--------------------------------");
  
     for (const element of this.dataSource) {
-      console.log(element.item); 
-      console.log(element.item.status); 
       if(element.item.status == !this.isAllSelected()){
         this.setConclusionTaskLoop(element.item.id, this.todoId);  
       }
@@ -187,28 +160,13 @@ export class PessoaProjectComponent implements OnInit  {
   }
 
   checkClicEvent(event:any){
-    console.log("checkClicEvent");
-    console.log(event);
-    console.log("---------------------------------");
-    console.log(event.item);
-
     this.setConclusionTask(event.item.id, this.todoId);
   }
 
   setConclusionTask(id: string, todoId:string){
-    // let name = "name";
-    // this.todoService.setConclusionTask({ id, todoId, name }).subscribe({
-    //   next: (res) => res,
-    //   error: (e) => e,
-    // })
   }
 
   setConclusionTaskLoop(id: string, todoId:string){
-    // let name = "name";
-    // this.todoService.setConclusionTaskLoop({ id, todoId, name }).subscribe({
-    //   next: (res) => res,
-    //   error: (e) => e,
-    // })
   }
 
   goBack(){
@@ -216,8 +174,6 @@ export class PessoaProjectComponent implements OnInit  {
   }
 
   nextpageData(element:any){
-    console.log("nextpageData");
-    console.log(element);
     this.pgnation_pageSize = element.pageIndex;  
     this.pgnation_length = element.pageSize;  
 
