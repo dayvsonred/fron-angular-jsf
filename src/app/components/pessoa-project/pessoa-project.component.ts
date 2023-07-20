@@ -22,10 +22,10 @@ const ELEMENT_DATA: TodoElement[] = [
 ];
 
 @Component({
-  templateUrl: 'pessoa-list.component.html',
-  styleUrls: ['pessoa-list.component.scss'],
+  templateUrl: 'pessoa-project.component.html',
+  styleUrls: ['pessoa-project.component.scss'],
 })
-export class PessoaListComponent implements OnInit  {
+export class PessoaProjectComponent implements OnInit  {
   //dataSource: Element[] | undefined;
   // @ViewChild(MatPaginator)
   // paginator!: MatPaginator; 
@@ -51,7 +51,7 @@ export class PessoaListComponent implements OnInit  {
     this.IdPg = this.route.snapshot.params['id'];
 
     let paginator = `?linesPerPage=${this.pgnation_length}&page=${this.pgnation_pageSize}`;
-    this.todoService.getPesoaForLinkProject(this.IdPg, paginator).subscribe({
+    this.todoService.getPesoainProject(this.IdPg ,paginator).subscribe({
       next: (res) => {
 
         this.pgnation_page = res.number; 
@@ -133,13 +133,7 @@ export class PessoaListComponent implements OnInit  {
       next: (res) => { this.ngOnInit() },
       error: (e) => e,
     })
-
-
-
-    this.router.navigate([`projects/link/${this.IdPg}`]);
     
-
-    this.router.navigate([`projects/link/${this.IdPg}`]);
   }
 
 

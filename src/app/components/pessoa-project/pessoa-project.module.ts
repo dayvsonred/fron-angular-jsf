@@ -14,10 +14,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http'; 
 
-import { PessoaListComponent } from './pessoa-list.component';
+import { PessoaProjectComponent } from './pessoa-project.component';
 import { MatTableModule} from '@angular/material/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PessoaListRoutingModule } from './pessoa-list-routing.module';
+import { PessoaProjectRoutingModule } from './pessoa-project-routing.module';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
 
@@ -27,11 +27,11 @@ import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator'
     FormsModule,
     ReactiveFormsModule, 
     CommonModule,
-    PessoaListRoutingModule,
+    PessoaProjectRoutingModule,
     MatCheckboxModule,
     MatToolbarModule,MatCardModule,MatButtonModule,MatTableModule,MatFormFieldModule,MatInputModule,
     MatPaginatorModule
   ],
-  declarations: [ PessoaListComponent ]
+  declarations: [ PessoaProjectComponent ]
 })
-export class PessoaListModule { }
+export class PessoaProjectModule { }

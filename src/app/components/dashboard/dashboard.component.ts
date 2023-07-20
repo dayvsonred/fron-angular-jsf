@@ -203,8 +203,6 @@ export class DashboardComponent implements OnInit {
     }else{
       this.router.navigate([`projects/link/${this.projectSelectIs}`]);
     }
-
-   
   }
 
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
@@ -216,10 +214,12 @@ export class DashboardComponent implements OnInit {
   }
 
   showPesoaOfProject(){
-    this.router.navigate(['projeto/show/idddddddddddddd']);
+    if(  this.disabledSelectAll == false ){
+      this.openDialog('200ms', '200ms');
+    }else{
+      this.router.navigate([`projects/pessoa/${this.projectSelectIs}`]);
+    }
   }
-
-
 }
 
 

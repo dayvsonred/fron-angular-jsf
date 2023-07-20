@@ -28,6 +28,11 @@ const routes: Routes = [
 		canActivate:[AuthGuard]
 	},
   {
+		path:'projects/pessoa/:id',
+    loadChildren: () => import('./components/pessoa-project/pessoa-project.module').then((m) => m.PessoaProjectModule),
+		canActivate:[AuthGuard]
+	},
+  {
 		path:'pessoa', 
     loadChildren: () => import('./components/pessoa/pessoa.module').then((m) => m.PessoaModule),
 		canActivate:[AuthGuard]

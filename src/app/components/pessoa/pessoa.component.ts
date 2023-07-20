@@ -31,6 +31,7 @@ export class PessoaComponent implements OnInit {
   risco= null;
   idgerente= null;
   budget=null;
+  nameFuncionario = "Manager";
 
   foods: any[] = [
     {value: 'ANALISE', viewValue: 'em análise'},
@@ -88,5 +89,13 @@ export class PessoaComponent implements OnInit {
 
   goBack(){
     this.router.navigate(['dashboard']);
+  }
+
+  changeNameFuncionario(){
+    if(this.nameFuncionario == "Manager"){
+      this.nameFuncionario = "Employee";
+    }else{
+      this.nameFuncionario = "Manager";
+    }
   }
 }

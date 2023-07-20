@@ -21,10 +21,11 @@ export class TodoService {
 	private urlBase: String = `http://localhost:8765`;
 	private link_create_project: String = `/core/projeto`;
 	private link_get_projeto: String = `/core/projeto/page`;
-	private link_get_projeto_link: String = `/core/pessoa/link/page`;
+	private link_get_projeto_link: String = `/core/pessoa/link/page/`;
 	private link_get_projeto_one: String = `/core/projeto/find/`;
 	private link_create_pessoa: String = `/core/pessoa`;
 	private link_projeto_link_pessoa: String = `/core/projeto/add/membro/`;
+	private link_get_projeto_pessoa: String = `/core/pessoa/project/page/`;
 	
 	// todoList: TodoList;
 
@@ -321,6 +322,7 @@ export class TodoService {
 
 		return this.http.get<TodoList>(`${this.urlBase}${this.link_get_projeto}${paginator}`,{ headers }).pipe(
 			map((res) => {
+				console.log(res);
 				return res;	
 			}),
 			catchError((e) => {
@@ -428,7 +430,7 @@ export class TodoService {
 		);
 	}
 
-	public getPesoaForLinkProject(paginator: string): Observable<any> {
+	public getPesoaForLinkProject(idProjeto:any, paginator: string): Observable<any> {
 		let token = this.getAccessToken();
 
 		const headers = {
@@ -436,7 +438,7 @@ export class TodoService {
 			'Content-Type': "application/json",
 		};
 
-		return this.http.get<TodoList>(`${this.urlBase}${this.link_get_projeto_link}${paginator}`,{ headers }).pipe(
+		return this.http.get<TodoList>(`${this.urlBase}${this.link_get_projeto_link}${idProjeto}${paginator}`,{ headers }).pipe(
 			map((res) => {
 				return res;	
 			}),
@@ -450,7 +452,38 @@ export class TodoService {
 		);
 	}
 
-	public addPesoaForLinkProject(idPessoa: string): Observable<any> {
+	public addPesoaForLinkProject(idPessoa: string, 
+		payload : {
+			id : number,
+
+		}): Observable<any> {
+		let token = this.getAccessToken();
+
+		const headers = {
+			'Authorization': "Bearer "+ token,
+			'Content-Type': "application/json",
+		};
+		const body = payload;
+
+		console.log("idPessoa");
+		console.log(idPessoa);
+		console.log(body);
+
+		return this.http.post<TodoList>(`${this.urlBase}${this.link_projeto_link_pessoa}${idPessoa}`, body, { headers }).pipe(
+			map((res) => {
+				return this.router.navigate([`projects/link/${body.id}`]);
+			}),
+			catchError((e) => {
+				if (e.error.message) return throwError(() => e.error.message);
+				return throwError(
+					() =>
+						'No momento não estamos conseguindo validar este dados, tente novamente mais tarde!'
+				);
+			})
+		);
+	}
+
+	public getPesoainProject(idProjeto:any, paginator: string): Observable<any> {
 		let token = this.getAccessToken();
 
 		const headers = {
@@ -458,7 +491,7 @@ export class TodoService {
 			'Content-Type': "application/json",
 		};
 
-		return this.http.get<TodoList>(`${this.urlBase}${this.link_projeto_link_pessoa}${idPessoa}`,{ headers }).pipe(
+		return this.http.get<TodoList>(`${this.urlBase}${this.link_get_projeto_pessoa}${idProjeto}${paginator}`,{ headers }).pipe(
 			map((res) => {
 				return res;	
 			}),
