@@ -26,11 +26,11 @@ export class ProjectsEditComponent implements OnInit, AfterViewInit  {
   data_fim= null;
   descricao= null;
   setStatus:any= null;
-  setrisco= null;
   idgerente= null;
   budget=null;
   projectId=null;
   projectIdOk:any= null;
+
 
   foods: any[] = [
     {value: 'ANALISE', viewValue: 'em análise'},
@@ -44,37 +44,39 @@ export class ProjectsEditComponent implements OnInit, AfterViewInit  {
   ];
 
   risks: any[] = [
-    {value: 'baixo', viewValue: 'baixo risco'},
-    {value: 'médio', viewValue: 'médio risco'},
-    {value: 'alto', viewValue: 'alto risco'}
-  ];
-
+    {value: 'baixo', viewValue: 'baixo risco' , index: 0},
+    {value: 'medio', viewValue: 'médio risco', index: 1},
+    {value: 'alto', viewValue: 'alto risco', index: 2}
+  ];  
 
   constructor(private router: Router,
     private todoService: TodoService, 
     private fb: FormBuilder,
     private route: ActivatedRoute
-    ) { }
+    ) { 
+      this.projectId = this.route.snapshot.params['id'];
+      this.getData(this.projectId);
+    }
   
 
   ngOnInit() {
-
+    
     this.form = this.fb.group({
       nome: ['', Validators.required],
       data_inicio: ['', Validators.required],
       data_previsao_fim: ['', Validators.required],
       data_fim: ['', Validators.required],
       descricao: ['', Validators.required],
-      status: ['', Validators.required],
-      risco: ['', Validators.required],
+      status: ['CANCELADO', Validators.required],
+      risco: ['baixo', Validators.required],
       idgerente: ['', Validators.required],
       budget: ['', Validators.required],
     });
   }
 
   ngAfterViewInit(){
-    this.projectId = this.route.snapshot.params['id'];
-    this.getData(this.projectId);
+    // this.projectId = this.route.snapshot.params['id'];
+    // this.getData(this.projectId);
   }
 
 
@@ -97,8 +99,10 @@ export class ProjectsEditComponent implements OnInit, AfterViewInit  {
         //   picker: [dateConclusion, Validators.required],
         //   pickerTimer: [`${hora}:${min}`, Validators.required]
         // });
-        this.setrisco = res.risco;
-        this.setStatus = res.status;
+
+        //this.form.value.risco = {value: 'alto', viewValue: 'alto risco'};
+
+        
 
         this.form = this.fb.group({
           nome:               [res.nome                               , Validators.required],
@@ -107,10 +111,11 @@ export class ProjectsEditComponent implements OnInit, AfterViewInit  {
           data_fim:           [this.formatDate(res.data_fim)          , Validators.required],
           descricao:          [res.descricao                          , Validators.required],
           status:             [res.status                             , Validators.required],
-          risco:              [res.risco                              , Validators.required],
+          risco:              [res.risco                               , Validators.required],
           idgerente:          [res.idgerente                          , Validators.required],
-          budget:             [res.orcamento                             , Validators.required],
+          budget:             [res.orcamento                          , Validators.required],
         });
+
 
       },
       error: (e) => e,
@@ -155,6 +160,7 @@ export class ProjectsEditComponent implements OnInit, AfterViewInit  {
 			orcamento: this.form.value.budget,
 			risco: this.form.value.risco,
 			idgerente: this.form.value.idgerente,
+
 		}).subscribe({
       next: (res) => res,
       error: (e) => e,
@@ -163,5 +169,21 @@ export class ProjectsEditComponent implements OnInit, AfterViewInit  {
 
   goBack(){
     this.router.navigate(['dashboard']);
+  }
+
+  sortByProducts(value:any) {
+    console.log(value)
+  }
+
+  sortByProducts2(value:any) {
+    console.log(value)
+    
+  }
+  onSelectEvent(value:any, sssss:any) {
+    console.log("onSelectEvent")
+    console.log(value)
+    console.log(value.source.value)
+    //this.form.value.risco = value.source.value;
+
   }
 }
