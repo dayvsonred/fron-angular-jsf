@@ -13,6 +13,7 @@ export interface TodoElement {
   status: any;
   item: any;
   disabled: boolean;
+  delete: any;
 }
 
 const ELEMENT_DATA: TodoElement[] = [];
@@ -29,7 +30,7 @@ export class DashboardComponent implements OnInit {
 
   selection = new SelectionModel<TodoElement>(true, []);
 
-  displayedColumns: string[] = ['select','position', 'name', 'status'];
+  displayedColumns: string[] = ['select','position', 'name', 'status', 'delete' ];
   dataSource = ELEMENT_DATA;
   changes = new Subject<void>();
 
@@ -55,7 +56,13 @@ export class DashboardComponent implements OnInit {
         let todoList = []; 
         for (let element of res.content) {
           console.log(element); 
-          todoList.push({ position: todoList.length, name: element.nome, status: element.status, item: element, disabled: false});
+          todoList.push({ position: todoList.length, 
+            name: element.nome, 
+            status: element.status, 
+            item: element, 
+            disabled: false,
+            delete: element
+          });
         }
 
         this.dataSource = todoList;
@@ -220,6 +227,19 @@ export class DashboardComponent implements OnInit {
       this.router.navigate([`projects/pessoa/${this.projectSelectIs}`]);
     }
   }
+
+
+  onDelete(element:any){
+    console.log(element);
+
+    this.todoService.onDeleteProject(element.delete.id).subscribe({
+      next: (res) => { this.ngOnInit() },
+      error: (e) => e,
+    })
+
+  }
+
+
 }
 
 

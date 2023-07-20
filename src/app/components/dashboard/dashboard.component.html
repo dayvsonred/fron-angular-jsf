@@ -41,6 +41,15 @@
           </td>
         </ng-container>
 
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef> Delete </th>
+          <td mat-cell *matCellDef="let element" (click)="onDelete(element)"> 
+            <span class="material-symbols-outlined">
+              delete
+              </span>
+          </td>
+        </ng-container>
+
         <!-- <ng-container matColumnDef="weight">
                       <th mat-header-cell *matHeaderCellDef> Weight </th>
                       <td mat-cell *matCellDef="let element"> {{element.weight}} </td>

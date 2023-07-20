@@ -26,6 +26,7 @@ export class TodoService {
 	private link_create_pessoa: String = `/core/pessoa`;
 	private link_projeto_link_pessoa: String = `/core/projeto/add/membro/`;
 	private link_get_projeto_pessoa: String = `/core/pessoa/project/page/`;
+	private link_delete_project: String = `/core/projeto/delete/`;
 	
 	// todoList: TodoList;
 
@@ -494,6 +495,30 @@ export class TodoService {
 		return this.http.get<TodoList>(`${this.urlBase}${this.link_get_projeto_pessoa}${idProjeto}${paginator}`,{ headers }).pipe(
 			map((res) => {
 				return res;	
+			}),
+			catchError((e) => {
+				if (e.error.message) return throwError(() => e.error.message);
+				return throwError(
+					() =>
+						'No momento não estamos conseguindo validar este dados, tente novamente mais tarde!'
+				);
+			})
+		);
+	}
+
+
+	
+	public onDeleteProject(idProjeto : number ): Observable<any> {
+		let token = this.getAccessToken();
+
+		const headers = {
+			'Authorization': "Bearer "+ token,
+			'Content-Type': "application/json",
+		}; 
+
+		return this.http.delete<any>(`${this.urlBase}${this.link_delete_project}${idProjeto}`, { headers }).pipe(
+			map((res) => {
+				return this.router.navigate(['dashboard']);	
 			}),
 			catchError((e) => {
 				if (e.error.message) return throwError(() => e.error.message);
